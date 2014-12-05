@@ -1,0 +1,12 @@
+diff -ruN a/salt/srv/salt/_modules/ceph.py b/salt/srv/salt/_modules/ceph.py
+--- a/salt/srv/salt/_modules/ceph.py	2014-11-28 17:23:53.000000000 +0300
++++ b/salt/srv/salt/_modules/ceph.py	2014-12-05 14:55:46.076406581 +0300
+@@ -510,7 +510,7 @@
+     """
+     Given an admin socket path, learn all we can about that service
+     """
+-    cluster_name, service_type, service_id = re.match("^(.+)-(mon|osd|mds)\.(.+)\.asok$", os.path.basename(socket_path)).groups()
++    cluster_name, service_type, service_id = re.match("^(.+)-(client|mon|osd|mds)\.(.+)\.asok$", os.path.basename(socket_path)).groups()
+ 
+     status = None
+     # Interrogate the service for its FSID
