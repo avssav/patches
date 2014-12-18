@@ -1,0 +1,15 @@
+diff -ruN a/opt/calamari/salt/salt/_modules/ceph.py b/opt/calamari/salt/salt/_modules/ceph.py
+--- a/opt/calamari/salt/salt/_modules/ceph.py	2014-12-10 16:59:00.000000000 +0300
++++ b/opt/calamari/salt/salt/_modules/ceph.py	2014-12-15 13:59:30.412107622 +0300
+@@ -521,7 +521,10 @@
+ 
+     status = None
+     # Interrogate the service for its FSID
+-    if service_type != 'mon':
++    if service_type == 'client':
++            config = json.loads(admin_socket(socket_path, ['config', 'get', 'fsid'], 'json'))
++            fsid = config['fsid']
++    elif service_type != 'mon':
+         try:
+             fsid = json.loads(admin_socket(socket_path, ['status'], 'json'))['cluster_fsid']
+         except AdminSocketError:
